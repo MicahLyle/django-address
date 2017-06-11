@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 __all__ = ['AddressWidget', 'AddressField']
 
 if not settings.GOOGLE_MAPS_API_KEY:
-    raise ImproperlyConfigured("GOOGLE_MAPS_API_KEY is not configured in settings.py")
+    raise ImproperlyConfigured("GOOGLE_MAPS_API_KEY is not configured in the settings.")
 
 
 class AddressWidget(forms.TextInput):
