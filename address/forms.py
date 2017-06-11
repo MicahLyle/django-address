@@ -18,8 +18,8 @@ logger = logging.getLogger(__name__)
 
 __all__ = ['AddressWidget', 'AddressField']
 
-if not settings.GOOGLE_API_KEY:
-    raise ImproperlyConfigured("GOOGLE_API_KEY is not configured in settings.py")
+if not settings.GOOGLE_MAPS_API_KEY:
+    raise ImproperlyConfigured("GOOGLE_MAPS_API_KEY is not configured in settings.py")
 
 
 class AddressWidget(forms.TextInput):
@@ -34,9 +34,10 @@ class AddressWidget(forms.TextInput):
 
     class Media:
         js = (
-            'https://maps.googleapis.com/maps/api/js?libraries=places&key=%s' % settings.GOOGLE_API_KEY,
+            'https://maps.googleapis.com/maps/api/js?libraries=places&key=%s' % settings.GOOGLE_MAPS_API_KEY,
             'js/jquery.geocomplete.min.js',
-            'address/js/address.js')
+            'address/js/address.js'
+        )
 
     def __init__(self, *args, **kwargs):
         attrs = kwargs.get('attrs', {})
