@@ -21,7 +21,6 @@ __all__ = ['AddressWidget', 'AddressField']
 if not settings.GOOGLE_MAPS_API_KEY:
     raise ImproperlyConfigured("GOOGLE_MAPS_API_KEY is not configured in the settings.")
 
-
 class AddressWidget(forms.TextInput):
     components = [('country', 'country'), ('country_code', 'country_short'),
                   ('locality', 'locality'), ('sublocality', 'sublocality'),
@@ -85,9 +84,9 @@ class AddressWidget(forms.TextInput):
 
 
 class AddressField(forms.ModelChoiceField):
-    widget = AddressWidget
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, widget_attrs={}, *args, **kwargs):
+        self.widget = AddressWidget(attrs=widget_attrs)
         kwargs['queryset'] = Address.objects.none()
         super(AddressField, self).__init__(*args, **kwargs)
 
