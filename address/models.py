@@ -172,7 +172,7 @@ class Country(models.Model):
 class State(models.Model):
     name = models.CharField(max_length=165, blank=True)
     code = models.CharField(max_length=3, blank=True)
-    country = models.ForeignKey(Country, related_name='states')
+    country = models.ForeignKey(Country, related_name='states', on_delete=models.CASCADE)
 
     class Meta:
         unique_together = ('name', 'country')

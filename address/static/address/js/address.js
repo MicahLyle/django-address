@@ -5,7 +5,12 @@ $(function() {
 		var fmtd = $('input[name="' + self.attr('name') + '_formatted"]');
         self.geocomplete({
             details: cmps,
-            detailsAttribute: 'data-geo'
+            detailsAttribute: 'data-geo',
+			map: "#interactive_map",
+			markerOptions: {
+				draggable: true
+			},
+			location: "San Francisco"
         }).change(function() {
 			if (self.val() != fmtd.val()) {
 				var cmp_names = ['country', 'country_code', 'locality', 'postal_code',
@@ -14,6 +19,8 @@ $(function() {
 				for(var ii = 0; ii < cmp_names.length; ++ii)
 					$('input[name="' + self.attr('name') + '_' + cmp_names[ii] + '"]').val('');
 			}
+		}).bind("geocode:dragged", function(event, result) {
+			console.log(result);
 		});
     });
 });
